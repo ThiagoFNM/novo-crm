@@ -95,7 +95,7 @@ export default function ListarEmpresas() {
             moveColumn(active.id as string, over.id as string);
         }
     }
-    
+
     const table = useReactTable({
         data: tableData,
         columns: columnsEmpresas,
@@ -134,10 +134,10 @@ export default function ListarEmpresas() {
 
     return (
         <div className="w-screen flex flex-col h-[calc(100vh-64px)] overflow-hidden">
-            <div className="flex w-full items-center justify-between p-4">
-                <div className="flex">
-                    <h1 className="text-xl font-bold">Empresas</h1>
-                </div>
+            <div className="flex">
+                <h1 className="text-xl font-bold">Empresas</h1>
+            </div>
+            <div className="flex w-full items-center justify-between p-4 relative z-20">
 
                 <Controller pagination={pagination} table={table} filters={filters} setFilters={setFilters} />
 
@@ -178,8 +178,8 @@ export default function ListarEmpresas() {
                                                         style={{ width: header.getSize() }}
                                                     >
                                                         <div className="flex items-center p-0.5 hover:text-violet-300 transition-colors duration-200 ">
-                                                            
-                                                            <div 
+
+                                                            <div
                                                                 className="flex items-center cursor-pointer select-none"
                                                                 onClick={() => header.column.getCanSort() && header.column.toggleSorting()}
                                                             >

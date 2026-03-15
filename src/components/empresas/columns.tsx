@@ -46,7 +46,7 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
         accessorKey: "razaoSocial",
         header: "Razão Social",
         size: 500,
-        maxSize: 500,
+        maxSize: 600,
         minSize: 200,
         meta: {
             type: "text",
@@ -164,7 +164,9 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
             isResizable: false,
             isEllipsis: false,
             cellAlign: 'right',
-            draggable: true
+            draggable: true,
+            filterable: true,
+            filterType: "text",
         }
     },
     {
@@ -176,7 +178,9 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
             isResizable: false,
             isEllipsis: false,
             cellAlign: 'right',
-            draggable: true
+            draggable: true,
+            filterable: true,
+            filterType: "date",
         }
     },
     {
@@ -188,7 +192,9 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
             isResizable: false,
             isEllipsis: false,
             cellAlign: 'right',
-            draggable: true
+            draggable: true,
+            filterable: true,
+            filterType: "date",
         }
     },
     {
@@ -265,7 +271,9 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
             isResizable: false,
             isEllipsis: false,
             cellAlign: 'right',
-            draggable: true
+            draggable: true,
+            filterable: true,
+            filterType: "date",
         }
     },
     {
@@ -277,7 +285,9 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
             isResizable: false,
             isEllipsis: false,
             cellAlign: 'right',
-            draggable: true
+            draggable: true,
+            filterable: true,
+            filterType: "number",
         }
     },
 ]

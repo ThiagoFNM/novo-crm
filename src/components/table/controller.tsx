@@ -1,7 +1,7 @@
 'use client';
 
 import { PaginationState, Table } from "@tanstack/react-table"
-import { Filters } from "./filters"
+import { Filters } from "./filters-menu"
 import FiltersLine from "../ui/filters"
 import RegistersPerPage from "./registers-per-page"
 
@@ -31,8 +31,8 @@ export function Controller<T>({ pagination, table, filters, setFilters }: Contro
 
     return (
 
-        <div className="flex items-center space-x-4 w-full h-12 justify-end">
-            <div className="flex justify-end items-center space-x-2 overflow-x-auto overflow-y-hidden pb-1 scrollbar-hide no-scrollbar h-full">
+        <div className="flex items-center space-x-4 w-full h-12 justify-end relative z-50">
+            <div className="flex justify-end items-center space-x-2 h-full">
                 {table.getFilteredSelectedRowModel().rows.length > 0 && (
                     <div className="text-xs text-zinc-300 whitespace-nowrap px-2">
                         {table.getFilteredSelectedRowModel().rows.length} de{" "}
@@ -40,7 +40,7 @@ export function Controller<T>({ pagination, table, filters, setFilters }: Contro
                     </div>
                 )}
 
-                <FiltersLine filters={filters} removeFilter={removeFilter} />
+                <FiltersLine filters={filters} removeFilter={removeFilter} updateFilter={handleFilterChange} />
 
                 <Filters table={table} filters={filters} setFilters={setFilters} />
             </div>
