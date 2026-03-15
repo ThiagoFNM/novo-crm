@@ -86,7 +86,9 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
             type: "text",
             isResizable: true,
             isEllipsis: false,
-            draggable: true
+            draggable: true,
+            filterable: true,
+            filterType: "text",
         }
     },
     {

@@ -1,6 +1,6 @@
-import db from '@/db'
+import db from '@/app/infra/database/db'
 import { NextResponse } from 'next/server'
-import { cargosInPortal, departamentosInPortal, equipesInPortal, rolesInPortal, usuariosInPortal } from '@/db/schema'
+import { cargosInPortal, departamentosInPortal, equipesInPortal, rolesInPortal, usuariosInPortal } from '@/app/infra/database/db/schema'
 import { and, eq, SQL } from 'drizzle-orm'
 import { verifyHashPassword } from '@/lib/verifyhash'
 import { generateToken } from '@/lib/token'
