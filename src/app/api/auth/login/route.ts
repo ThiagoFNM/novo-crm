@@ -73,6 +73,8 @@ export async function POST(request: Request) {
 
         const user = consulta[0]
 
+        console.log(user)
+
         if (!user) {
 
             return NextResponse.json(
@@ -93,8 +95,6 @@ export async function POST(request: Request) {
         }
 
         const bypass = await verifyHashPassword(senha, user.senha!)
-
-        console.log(bypass)
 
         if (!bypass) {
 

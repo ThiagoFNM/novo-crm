@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import isAuthenticated from "./lib/auth";
+import isAuthenticated from "./lib/auth/auth";
 
 const PUBLIC_ROTES = [
     '/login',

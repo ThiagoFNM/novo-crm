@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Building, Briefcase, Contact, HomeIcon } from "lucide-react"
+import { Building, Briefcase, Contact, HomeIcon, LucideIcon } from "lucide-react"
 
 import {
     Sidebar,
@@ -10,14 +10,14 @@ import {
     SidebarMenu,
     SidebarMenuItem,
     SidebarMenuButton,
-    SidebarGroupLabel
+    SidebarGroupLabel,
 } from "@/components/ui/sidebar"
 
 function HeaderMenu() {
     return (
         <SidebarHeader className="px-4 py-3">
             <div className="flex items-center gap-2">
-                <span className="text-lg font-bold">
+                <span className="text-lg font-bold sub-tracking-1">
                     CRM Noatec
                 </span>
                 <span className="text-xs text-muted-foreground">
@@ -28,7 +28,13 @@ function HeaderMenu() {
     )
 }
 
-const linksContent = [
+type LinkContent = {
+    href: string
+    label: string
+    icon: LucideIcon
+}
+
+const linksContent: LinkContent[] = [
     {
         href: "/empresas",
         label: "Empresas",
@@ -45,6 +51,21 @@ const linksContent = [
         icon: Contact
     }
 ]
+
+function sideBarSkeleton(dataMenuLinks: any[]) {
+    return (
+        dataMenuLinks.map((link) => (
+            <SidebarMenuItem key={link.href}>
+                <SidebarMenuButton asChild>
+                    <Link href={link.href}>
+                        <link.icon />
+                        {link.label}
+                    </Link>
+                </SidebarMenuButton>
+            </SidebarMenuItem>
+        ))
+    )
+}
 
 function SidebarMenuHeader() {
     return (
@@ -65,14 +86,14 @@ function SidebarMenuHeader() {
 
 
             <SidebarGroup>
-                <SidebarGroupLabel>Conteúdo</SidebarGroupLabel>
+                <SidebarGroupLabel>Gestão</SidebarGroupLabel>
                 <SidebarMenu>
                     {linksContent.map((link) => (
                         <SidebarMenuItem key={link.href}>
                             <SidebarMenuButton asChild>
                                 <Link href={link.href}>
-                                    <link.icon />
-                                    {link.label}
+                                    <span className="opacity-50"><link.icon /></span>
+                                    <span className="text-sm">{link.label}</span>
                                 </Link>
                             </SidebarMenuButton>
                         </SidebarMenuItem>

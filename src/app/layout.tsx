@@ -12,7 +12,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br" className={cn("font-sans", inter.variable)}>
-      <body className="bg-zinc-">
+      <body className="bg-zinc-950">
         {children}
       </body>
     </html>
