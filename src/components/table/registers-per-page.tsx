@@ -13,7 +13,7 @@ export default function RegistersPerPage<TData>({ table, pagination }: { table: 
                 <SelectTrigger className="w-[180px] cursor-pointer bg-zinc-900 border-zinc-800 text-white hover:bg-zinc-800 transition-colors">
                     <SelectValue placeholder="10 por página" />
                 </SelectTrigger>
-                <SelectContent className="w-fit top-10 bg-zinc-900 border-zinc-800 text-white shadow-2xl">
+                <SelectContent className="w-fit top-10 bg-zinc-950/90 border-zinc-800 text-white shadow-2xl">
                     <SelectItem value="25" className="cursor-pointer focus:bg-zinc-800 focus:text-violet-300 hover:bg-zinc-800 hover:text-white transition-colors">25 por página</SelectItem>
                     <SelectItem value="50" className="cursor-pointer focus:bg-zinc-800 focus:text-violet-300 hover:bg-zinc-800 hover:text-white transition-colors">50 por página</SelectItem>
                     <SelectItem value="100" className="cursor-pointer focus:bg-zinc-800 focus:text-violet-300 hover:bg-zinc-800 hover:text-white transition-colors">100 por página</SelectItem>

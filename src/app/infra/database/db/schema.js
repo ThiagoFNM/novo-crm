@@ -72,3 +72,10 @@ export const usuariosInPortal = portalSchema.table("usuarios", {
 	tokenPrimeiroAcesso: uuid("token_primeiro_acesso"),
 	tokenExpiraEm: timestamp("token_expira_em", { withTimezone: true, mode: 'string' }),
 })
+
+export const statusEmpresas = carteiraSchema.table("status_empresas", {
+    id: serial().primaryKey().notNull(),
+    status: varchar("status", { length: 100 }).notNull(),
+    cor: varchar("cor", { length: 100 }).notNull(),
+	ativo: boolean().default(true),
+})

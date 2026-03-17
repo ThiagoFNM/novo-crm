@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react"
-import { useEmpresas } from "@/hooks/use-empresas"
+import { useEmpresas } from "@/hooks/empresa/use-empresas"
 import { flexRender, getCoreRowModel, useReactTable, getPaginationRowModel, getSortedRowModel, SortingState } from "@tanstack/react-table"
 import { columnsEmpresas } from "./columns"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"

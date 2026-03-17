@@ -98,10 +98,12 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
         maxSize: 200,
         minSize: 200,
         meta: {
-            type: "text",
+            type: "multiple",
             isResizable: false,
             isEllipsis: false,
-            draggable: true
+            draggable: true,
+            filterable: true,
+            filterType: "multiple",
         }
     },
     {

@@ -1,6 +1,6 @@
 import { asc, desc, sql } from "drizzle-orm";
 import { empresas } from "../../infra/database/db/schema";
-import { EmpresaRepository } from "../../infra/database/empresaRepository";
+import { EmpresaRepository } from "../../infra/database/empresas/empresaRepository";
 import { FilterParser } from "../FilterParser";
 
 

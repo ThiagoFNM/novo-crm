@@ -38,4 +38,6 @@ export class EmpresaRepository {
         return await db.select({ count: sql`count(*)` }).from(empresas)
             .where(conditions.length > 0 ? and(...conditions) : undefined)
     }
+
+    
 }

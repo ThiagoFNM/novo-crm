@@ -5,6 +5,8 @@ import HistoricTextFilter from "./historic-text-filter";
 import ConditionsInputFilter from "./conditions-input-filter";
 import { FilterValue } from "./filters";
 import { cn } from "@/lib/utils";
+import { ComboboxMultiple } from "./combobox-multiple";
+
 
 export default function InputFilter({ filter, filterValues, setFilterValues }: { filter: Filter, filterValues: FilterValue[], setFilterValues: React.Dispatch<React.SetStateAction<FilterValue[]>> }) {
     // Centralizando o estilo para facilitar manutenção. 
@@ -15,7 +17,6 @@ export default function InputFilter({ filter, filterValues, setFilterValues }: {
         focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 
         transition-all
     `;
-
 
     const { type } = filter
 
@@ -65,7 +66,6 @@ export default function InputFilter({ filter, filterValues, setFilterValues }: {
 
         setInputValue("")
     }
-
 
     return (
         <form className="flex flex-col gap-2 w-full" onSubmit={onSubmitTextFilter}>
@@ -278,16 +278,8 @@ export default function InputFilter({ filter, filterValues, setFilterValues }: {
             )}
 
             {/* Select (Lista de opções) */}
-            {type === "selected" && (
-                <select
-                    // Se o seu componente <Input /> suportar "select", você pode usá-lo. 
-                    // Mas se for uma tag nativa, use <select> com os mesmos estilos base.
-                    className={`${baseInputStyles} appearance-none cursor-pointer`}
-                >
-                    <option value="" disabled selected>Selecione...</option>
-                    <option value="opcao1">Opção 1</option>
-                    <option value="opcao2">Opção 2</option>
-                </select>
+            {type === "multiple" && (
+                <ComboboxMultiple />
             )}
         </form>
     );
