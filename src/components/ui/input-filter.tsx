@@ -5,7 +5,8 @@ import HistoricTextFilter from "./historic-text-filter";
 import ConditionsInputFilter from "./conditions-input-filter";
 import { FilterValue } from "./filters";
 import { cn } from "@/lib/utils";
-import { ComboboxMultiple } from "./combobox-multiple";
+import StatusMultipleFilter from "../filters/multiple/status";
+import SetoresMultipleFilter from "../filters/multiple/setores";
 
 
 export default function InputFilter({ filter, filterValues, setFilterValues }: { filter: Filter, filterValues: FilterValue[], setFilterValues: React.Dispatch<React.SetStateAction<FilterValue[]>> }) {
@@ -281,61 +282,11 @@ export default function InputFilter({ filter, filterValues, setFilterValues }: {
             {type === "multiple" && filter.id === "status" && (
                 <StatusMultipleFilter filter={filter} filterValues={filterValues} setFilterValues={setFilterValues} condition={condition} />
             )}
+
+            {type === "multiple" && filter.id === "setor" && (
+                <SetoresMultipleFilter filter={filter} filterValues={filterValues} setFilterValues={setFilterValues} condition={condition} />
+            )}
         </form>
     );
 }
 
-// Wrapper to handle dynamic fetch without polluting generic InputFilter logic
-import { useEmpresasStatus } from "@/hooks/status/use-empresas-status";
-
-function StatusMultipleFilter({ 
-    filter, 
-    filterValues, 
-    setFilterValues, 
-    condition 
-}: { 
-    filter: Filter, 
-    filterValues: FilterValue[], 
-    setFilterValues: React.Dispatch<React.SetStateAction<FilterValue[]>>,
-    condition: string 
-}) {
-    const { query } = useEmpresasStatus();
-
-    console.log(query.data?.data)
-    
-    const dataArray = Array.isArray(query.data) ? query.data : query.data?.data;
-    
-    const options = [
-        { label: "Vazio", value: "vazio" },
-        ...(dataArray || [])
-            .filter((status: any) => status.ativo !== false) // Assegurando de filtrar ativos
-            .map((status: any) => ({
-                label: status.status,
-                
-                //Alterar para envio ao backend para query, esse campo é responsalvel por passar valor do filtro para URL
-                value: status.status
-            }))
-    ];
-
-    const selectedValues = filterValues.map(f => f.condition === "vazio" ? "vazio" : String(f.value));
-
-    return (
-        <ComboboxMultiple 
-            options={options} 
-            value={selectedValues} 
-            isLoading={query.isLoading}
-            onChange={(newValues) => {
-                setFilterValues(prev => {
-                    const newValuesObjects = newValues.map(val => ({
-                        id: crypto.randomUUID(),
-                        name: filter.id,
-                        value: val === "vazio" ? "" : val,
-                        condition: val === "vazio" ? "vazio" : (condition || "igual")
-                    }));
-                    return newValuesObjects;
-                });
-            }} 
-            placeholder="Selecione os status..."
-        />
-    )
-}

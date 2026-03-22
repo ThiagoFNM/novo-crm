@@ -5,10 +5,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog"
-import { useStatusFormAction, getChanges } from "@/hooks/status/use-empresas-status"
+import { useStatusFormAction } from "@/hooks/status/use-status-form-action"
 import { Plus } from "lucide-react"
 import { Switch } from "@/components/ui/switch"
 import { UpdateEmpresaStatusDatTypes } from "@/service/empresa/empresaStatus"
+import { FormLabel } from "@/components/ui/form-label"
 
 const statusSolidColors = [
     "bg-red-500", "bg-green-500", "bg-blue-500", "bg-yellow-500", "bg-purple-500",
@@ -16,15 +17,6 @@ const statusSolidColors = [
     "bg-violet-500", "bg-fuchsia-500", "bg-rose-500", "bg-emerald-500", "bg-teal-500",
     "bg-sky-500", "bg-slate-500", "bg-gray-500", "bg-zinc-500", "bg-neutral-500",
 ]
-
-function FormLabel({ children, required }: { children: React.ReactNode, required?: boolean }) {
-    return (
-        <label className="text-sm font-medium">
-            {children}
-            {required && <span className="text-red-500 ml-1">*</span>}
-        </label>
-    )
-}
 
 export function FormStatus({ editMode = false, status, open: externalOpen, onOpenChange: externalOnOpenChange }: { editMode?: boolean, status?: UpdateEmpresaStatusDatTypes & { id?: number }, open?: boolean, onOpenChange?: (open: boolean) => void }) {
     const [internalOpen, setInternalOpen] = useState(false)

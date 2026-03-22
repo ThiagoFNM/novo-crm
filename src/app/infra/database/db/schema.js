@@ -1,4 +1,4 @@
-import {integer,text,timestamp, varchar, bigint, boolean, serial, pgSchema, uuid} from 'drizzle-orm/pg-core'
+import {integer,text,timestamp, varchar, bigint, boolean, serial, pgSchema, uuid, jsonb} from 'drizzle-orm/pg-core'
 import { sql } from "drizzle-orm"
 const carteiraSchema = pgSchema('carteira')
 const portalSchema = pgSchema('portal')
@@ -77,5 +77,21 @@ export const statusEmpresas = carteiraSchema.table("status_empresa", {
     id: serial().primaryKey().notNull(),
     status: varchar("status", { length: 100 }).notNull(),
     cor: varchar("cor", { length: 20 }).notNull(),
+	ativo: boolean().default(true),
+})
+
+export const setoresEmpresas = carteiraSchema.table("setores_empresas", {
+    id: serial().primaryKey().notNull(),
+    setor: varchar("setor", { length: 100 }).notNull(),
+    ativo: boolean().default(true),
+})
+
+export const pipelines = carteiraSchema.table("pipelines", {
+    id: serial().primaryKey().notNull(),
+    nome: varchar("nome", { length: 100 }).notNull(),
+    user_id: integer("user_id"),
+    entidade: varchar("entidade", { length: 50 }).notNull(),
+    config: jsonb("config").notNull(),
+    criadoEm: timestamp("created_at", { mode: 'string' }).default(sql`CURRENT_TIMESTAMP`),
 	ativo: boolean().default(true),
 })

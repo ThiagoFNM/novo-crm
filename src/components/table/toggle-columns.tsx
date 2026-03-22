@@ -18,6 +18,7 @@ export function ToggleColumns<TData>({
 }: {
   table: Table<TData>
 }) {
+   
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

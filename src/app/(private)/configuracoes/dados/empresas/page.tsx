@@ -13,6 +13,7 @@ import { LayoutGrid, ListChecks, Tags, GitBranch } from "lucide-react"
 import { useState } from "react"
 import { cn } from "@/lib/utils";
 import StatusEmpresas from "@/components/configuracoes/dados/empresas/status";
+import PipelinesEmpresas from "@/components/configuracoes/dados/empresas/pipelines";
 
 function MenuDadosEmpresas({ setCampoSelecionado, campoSelecionado }: { setCampoSelecionado: (campo: string) => void, campoSelecionado: string }) {
 
@@ -76,6 +77,10 @@ export default function ConfigDadosEmpresasPage() {
             <div className="w-full">
                 {campoSelecionado === "Status" && (
                     <StatusEmpresas />
+                )}
+
+                {campoSelecionado === "Pipelines" && (
+                    <PipelinesEmpresas />
                 )}
             </div>
         </section>

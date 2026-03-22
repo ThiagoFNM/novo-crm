@@ -57,7 +57,8 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
             filterType: "text",
             draggable: true,
             keyRegister: true,
-            clickable: true
+            clickable: true,
+            visible: false
         }
     },
     {
@@ -75,7 +76,8 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
             filterType: "text",
             draggable: true,
             keyRegister: true,
-            clickable: true
+            clickable: true,
+            visible: true
         },
         cell: cellCNPJ("cnpj")
     },
@@ -92,6 +94,7 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
             draggable: true,
             filterable: true,
             filterType: "text",
+            visible: true
         }
     },
     {

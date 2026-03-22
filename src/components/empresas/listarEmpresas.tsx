@@ -110,6 +110,14 @@ export default function ListarEmpresas() {
         getSortedRowModel: getSortedRowModel(),
         onColumnOrderChange: setColumnOrder,
         onRowSelectionChange: setRowSelection,
+        initialState: {
+            columnVisibility: columnsEmpresas.reduce((acc: Record<string, boolean>, col: any) => {
+                if (col.meta?.visible === false) {
+                    acc[col.id || col.accessorKey] = false;
+                }
+                return acc;
+            }, {})
+        },
         state: {
             sorting,
             pagination,
