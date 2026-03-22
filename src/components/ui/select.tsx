@@ -112,14 +112,14 @@ function SelectItem({
     <SelectPrimitive.Item
       data-slot="select-item"
       className={cn(
-        "relative flex text-xs w-full cursor-pointer items-center gap-2 rounded-sm py-2.5 px-2.5 outline-hidden select-none focus:bg-accent focus:text-accent-foreground not-data-[variant=destructive]: data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
+        "relative flex text-xs w-full cursor-pointer items-center gap-2 rounded-sm py-2.5 px-2.5 outline-hidden select-none focus:bg-violet-500/20 focus:text-accent-foreground not-data-[variant=destructive]: data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
         className
       )}
       {...props}
     >
       <span className="pointer-events-none absolute right-2 flex size-4 items-center justify-center">
         <SelectPrimitive.ItemIndicator>
-          <CheckIcon className="pointer-events-none text-violet-300" />
+          <CheckIcon className="pointer-events-none text-violet-600" />
         </SelectPrimitive.ItemIndicator>
       </span>
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>

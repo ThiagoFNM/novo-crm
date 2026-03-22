@@ -252,7 +252,9 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
             isResizable: false,
             isEllipsis: false,
             cellAlign: 'left',
-            draggable: true
+            draggable: true,
+            filterable: true,
+            filterType: "selected",
         }
     },
     {

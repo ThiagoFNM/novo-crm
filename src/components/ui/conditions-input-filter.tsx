@@ -1,5 +1,6 @@
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "./select"
 import { FilterValue } from "./filters"
+import { cn } from "@/lib/utils"
 
 export default function ConditionsInputFilter({
     filterValues,
@@ -11,7 +12,7 @@ export default function ConditionsInputFilter({
     type: "text" | "number" | "date"
 }) {
 
-    const condition = filterValues[0]?.condition ?? "igual"
+    const condition = filterValues[0]?.condition ?? "contem"
 
     const options = [
         { value: "igual", label: "Igual a", types: ["text", "number", "date"] },
@@ -44,18 +45,21 @@ export default function ConditionsInputFilter({
 
     return (
         <Select value={condition} onValueChange={handleChange}>
-            <SelectTrigger className="w-full h-8 px-2.5 bg-zinc-950 border border-zinc-800 
-                rounded-md text-xs text-zinc-200 focus:outline-none focus:ring-2 focus:ring-violet-500/50">
+            <SelectTrigger className="w-full h-8 px-2.5 bg-zinc-100 border-border
+                rounded-md text-xs text-zinc-950 focus:outline-none focus:ring-2 focus:ring-violet-500/50">
                 
                 <SelectValue placeholder="Condição" />
 
             </SelectTrigger>
 
-            <SelectContent className="bottom-0 top-10 bg-zinc-900 border border-zinc-800 rounded-md shadow-xl shadow-black/50 p-3 animate-in fade-in zoom-in-95 duration-200 text-zinc-200 text-xs">
+            <SelectContent position="popper" 
+            className={cn("bg-zinc-100 border-border rounded-md shadow-xl shadow-black/50 p-3 animate-in fade-in zoom-in-95 duration-200 text-zinc-950 text-xs",)}
+            >
                 {options.map(opt => (
-                    <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                    <SelectItem key={opt.value} value={opt.value} className={cn("text-zinc-950 text-xs my-2", opt.value === condition && "bg-violet-500/20")}
+                    >{opt.label}</SelectItem>
                 ))}
             </SelectContent>
         </Select>
     )
-}
+}

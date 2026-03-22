@@ -5,11 +5,9 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog"
-import { useEmpresasStatus } from "@/hooks/empresa/use-empresas-status"
+import { useStatusFormAction, getChanges } from "@/hooks/status/use-empresas-status"
 import { Plus } from "lucide-react"
-import { z } from "zod"
 import { Switch } from "@/components/ui/switch"
-import { toast } from "sonner"
 import { UpdateEmpresaStatusDatTypes } from "@/service/empresa/empresaStatus"
 
 const statusSolidColors = [
@@ -28,28 +26,7 @@ function FormLabel({ children, required }: { children: React.ReactNode, required
     )
 }
 
-const statusSchema = z.object({
-    status: z.string().nonempty("Nome do status é obrigatório"),
-    cor: z.string().nonempty("Cor é obrigatória"),
-    ativo: z.boolean().optional(),
-})
-
-function getChanges(oldData: UpdateEmpresaStatusDatTypes = {}, newData: UpdateEmpresaStatusDatTypes) {
-    const changes: UpdateEmpresaStatusDatTypes = {}
-    if (oldData.status !== newData.status) {
-        changes.status = newData.status
-    }
-    if (oldData.cor !== newData.cor) {
-        changes.cor = newData.cor
-    }
-    if (oldData.ativo !== newData.ativo) {
-        changes.ativo = newData.ativo
-    }
-    return changes
-}
-
 export function FormStatus({ editMode = false, status, open: externalOpen, onOpenChange: externalOnOpenChange }: { editMode?: boolean, status?: UpdateEmpresaStatusDatTypes & { id?: number }, open?: boolean, onOpenChange?: (open: boolean) => void }) {
-    const { createMutation, updateMutation } = useEmpresasStatus()
     const [internalOpen, setInternalOpen] = useState(false)
     const open = externalOpen !== undefined ? externalOpen : internalOpen
     const setOpen = externalOnOpenChange || setInternalOpen
@@ -57,6 +34,10 @@ export function FormStatus({ editMode = false, status, open: externalOpen, onOpe
     const [statusName, setStatusName] = useState(status?.status || "")
     const [color, setColor] = useState(status?.cor || "bg-zinc-500")
     const [active, setActive] = useState(status?.ativo ?? true)
+
+    const newData: UpdateEmpresaStatusDatTypes = { status: statusName, cor: color, ativo: active }
+
+    const { handleSubmit, isPending } = useStatusFormAction({ status, editMode, setOpen })
 
     useEffect(() => {
         if (open) {
@@ -70,57 +51,15 @@ export function FormStatus({ editMode = false, status, open: externalOpen, onOpe
     const [errors, setErrors] = useState<Record<string, string>>({})
 
     const handleSave = () => {
-
-        const newData = { status: statusName, cor: color, ativo: active }
-        const changes = getChanges(status || {}, newData)
-        const hasChanges = Object.keys(changes).length > 0
-
-        if (editMode && !hasChanges) {
-            toast.info("Nenhuma alteração foi feita", {
-                description: "Nenhuma alteração foi feita",
-            })
-            return
-        }
-
-        const result = statusSchema.safeParse({
-            status: statusName,
-            cor: color,
-            ativo: active,
+        handleSubmit({
+            data: newData,
+            reset: () => {
+                setStatusName("")
+                setColor("bg-zinc-500")
+                setActive(true)
+            },
+            setErrors,
         })
-
-        if (!result.success) {
-            const formattedErrors = result.error.issues.reduce((acc, issue): Record<string, string> => {
-                acc[String(issue.path[0])] = issue.message
-                return acc
-            }, {} as Record<string, string>)
-            toast.error("Erro ao adicionar status", {
-                description: "Verifique os campos",
-            })
-            setErrors(formattedErrors)
-            return
-        }
-
-        if (editMode && status?.id) {
-            updateMutation.mutate(
-                {
-                    id: status.id,
-                    data: changes
-                },
-                {
-                    onSuccess: () => setOpen(false)
-                }
-
-            )
-
-            toast.success("Status atualizado com sucesso", {
-                description: "O status foi atualizado com sucesso",
-            })
-        } else {
-            createMutation.mutate(
-                { status: statusName, cor: color, ativo: true },
-                { onSuccess: () => { setOpen(false); setStatusName(""); setColor("bg-zinc-500") } }
-            )
-        }
     }
 
     return (
@@ -190,8 +129,8 @@ export function FormStatus({ editMode = false, status, open: externalOpen, onOpe
                     </div>
                     <DialogFooter >
                         <Button variant="outline" onClick={() => setOpen(false)}>Cancelar</Button>
-                        <Button type="submit" disabled={createMutation.isPending || updateMutation.isPending} className="ml-1">
-                            {createMutation.isPending || updateMutation.isPending ? "Salvando..." : "Salvar"}
+                        <Button type="submit" disabled={isPending} className="ml-1">
+                            {isPending ? "Salvando..." : "Salvar"}
                         </Button>
                     </DialogFooter>
                 </form>

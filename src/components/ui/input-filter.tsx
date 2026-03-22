@@ -12,16 +12,16 @@ export default function InputFilter({ filter, filterValues, setFilterValues }: {
     // Centralizando o estilo para facilitar manutenção. 
     // Fundo zinc-950 faz o input "afundar" em relação ao dropdown que é zinc-900.
     const baseInputStyles =`
-        w-full h-8 px-2.5 bg-zinc-950 border border-zinc-800 
-        rounded-md text-xs text-zinc-200 placeholder:text-zinc-500 
-        focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 
-        transition-all
+        w-full h-8 px-2.5 bg-zinc-100 border border-violet-500/50 mt-0.5
+        rounded-md text-xs text-zinc-950 placeholder:text-zinc-500 
+        focus:outline-none focus:ring-2! focus:ring-violet-500/30! focus:border-violet-500!
+        transition-all! text-xs!
     `;
 
     const { type } = filter
 
     const [inputValue, setInputValue] = useState<string>('')
-    const [condition, setCondition] = useState<string>("igual")
+    const [condition, setCondition] = useState<string>("contem")
 
     // Synchronize local condition with existing filter if applicable
     useEffect(() => {
@@ -43,7 +43,7 @@ export default function InputFilter({ filter, filterValues, setFilterValues }: {
         }
     }
 
-    const onSubmitTextFilter = (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmitTextFilter = (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         const value = inputValue.trim()

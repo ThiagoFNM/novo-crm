@@ -31,11 +31,16 @@ export default function HistoricTextFilter({
     }
 
     return (
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 ">
             {filtersValues.map((filter) => (
-                <div key={filter.id} className="flex items-center gap-2 text-xs text-zinc-400 bg-zinc-950 p-1 px-2 rounded-md border border-zinc-800">
+                <div key={filter.id} 
+                className="flex items-center gap-2 text-xs text-zinc-800 font-semibold bg-zinc-100 p-2 rounded-md border-zinc-800 hover:bg-red-100   transition-colors duration-200"
+                onClick={() => {
+                 removeFilter(filter.id)  
+                }}
+                >
                     
-                    <span className="font-mono text-violet-400">{filter.condition ? conditionLabels[filter.condition] : ''}</span>
+                    <span className="font-mono text-violet-400">{filter.condition ? conditionLabels[filter.condition] : ''}:</span>
                     <span>
                         {filter.value.includes('|') ? (
                             <>
@@ -46,9 +51,8 @@ export default function HistoricTextFilter({
                         )}
                     </span>
 
-                    <Button type="button" variant="ghost" className="h-4 w-4 p-0 ml-auto hover:text-red-400" onClick={() => removeFilter(filter.id)}><X size={12} /></Button>
                 </div>
             ))}
         </div>
     )
-}
+}
