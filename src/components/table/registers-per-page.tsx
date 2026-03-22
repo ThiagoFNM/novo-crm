@@ -10,7 +10,7 @@ export default function RegistersPerPage<TData>({ table, pagination }: { table: 
                 value={pagination.pageSize.toString()}
                 onValueChange={(value: string) => table.setPageSize(Number(value))}
             >
-                <SelectTrigger className="w-[180px] cursor-pointer bg-zinc-900 border-zinc-800 text-white hover:bg-zinc-800 transition-colors">
+                <SelectTrigger className="w-[180px] cursor-pointer bg-zinc-100 border-border text-zinc-950 hover:bg-zinc-200 transition-colors duration-200">
                     <SelectValue placeholder="10 por página" />
                 </SelectTrigger>
                 <SelectContent className="w-fit top-10 bg-zinc-950/90 border-zinc-800 text-white shadow-2xl">

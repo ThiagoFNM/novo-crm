@@ -1,4 +1,4 @@
-import { and, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 import db from "../db";
 import { statusEmpresas } from "../db/schema";
 import { InferInsertModel, InferSelectModel } from "drizzle-orm";
@@ -30,7 +30,7 @@ export class EmpresaStatusRepository {
         if(conditions.length > 0){
             return await db.select(this.baseSelect).from(statusEmpresas).where(and(...conditions))
         }
-        return await db.select(this.baseSelect).from(statusEmpresas)
+        return await db.select(this.baseSelect).from(statusEmpresas).orderBy(desc(statusEmpresas.ativo))
     }
 
     async create(data: StatusEmpresasInsert) {

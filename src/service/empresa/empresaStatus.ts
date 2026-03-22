@@ -29,3 +29,21 @@ export async function getEmpresaStatus(filters: any[] = []) {
 
     return await axios.get(`/api/empresas/status?${params.toString()}`);
 }
+
+export async function createEmpresaStatus(data: any) {
+    return await axios.post(`/api/empresas/status`, data);
+}
+
+export async function deleteEmpresaStatus(id: number) {
+    return await axios.delete(`/api/empresas/status?id=${id}`);
+}
+
+export type UpdateEmpresaStatusDatTypes = {
+    status?: string,
+    cor?: string,
+    ativo?: boolean
+}
+
+export async function updateEmpresaStatus(id: number, data: UpdateEmpresaStatusDatTypes) {
+    return await axios.put(`/api/empresas/status?id=${id}`, data);
+}

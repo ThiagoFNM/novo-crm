@@ -36,7 +36,7 @@ export function Filters<TData>({ table, filters, setFilters }: FilterProps<TData
         <div className="flex items-center space-x-2">
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="sm" className="h-9 bg-zinc-900 border-zinc-800 text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors cursor-pointer">
+                    <Button variant="controller" size="sm" className="">
                         <Plus size={14} className="mr-2" />
                         <span>Adicionar filtro</span>
                     </Button>
@@ -68,10 +68,10 @@ export function Filters<TData>({ table, filters, setFilters }: FilterProps<TData
             </DropdownMenu>
 
             <Button
-                variant="ghost"
+                variant="controller"
                 size="sm"
                 onClick={clearAllFilters}
-                className="h-9 text-zinc-500 hover:text-white hover:bg-zinc-800 transition-colors"
+                className="text-zinc-500 hover:text-red-500 hover:bg-red-500/10 shadow-none border-none"
                 disabled={!containFilters}
             >
                 <X size={14} className="mr-2" />

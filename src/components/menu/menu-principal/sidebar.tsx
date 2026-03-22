@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Building, Briefcase, Contact, HomeIcon, LucideIcon } from "lucide-react"
+import { Building, Briefcase, Contact, HomeIcon, LucideIcon, SettingsIcon, ChevronRight } from "lucide-react"
 
 import {
     Sidebar,
@@ -11,7 +11,17 @@ import {
     SidebarMenuItem,
     SidebarMenuButton,
     SidebarGroupLabel,
+    SidebarMenuSub,
+    SidebarMenuSubItem,
+    SidebarMenuSubButton,
+    useSidebar,
 } from "@/components/ui/sidebar"
+
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
 
 function HeaderMenu() {
     return (
@@ -68,6 +78,7 @@ function sideBarSkeleton(dataMenuLinks: any[]) {
 }
 
 function SidebarMenuHeader() {
+    const { isMobile } = useSidebar()
     return (
         <>
             <SidebarGroup>
@@ -88,16 +99,45 @@ function SidebarMenuHeader() {
             <SidebarGroup>
                 <SidebarGroupLabel>Gestão</SidebarGroupLabel>
                 <SidebarMenu>
-                    {linksContent.map((link) => (
-                        <SidebarMenuItem key={link.href}>
-                            <SidebarMenuButton asChild>
-                                <Link href={link.href}>
-                                    <span className="opacity-50"><link.icon /></span>
-                                    <span className="text-sm">{link.label}</span>
-                                </Link>
-                            </SidebarMenuButton>
+                    <Collapsible asChild defaultOpen className="group/collapsible">
+                        <SidebarMenuItem>
+                            <CollapsibleTrigger asChild>
+                                <SidebarMenuButton tooltip="Gestão">
+                                    <Briefcase />
+                                    <span>Gestão</span>
+                                    <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                                </SidebarMenuButton>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent>
+                                <SidebarMenuSub>
+                                    {linksContent.map((link) => (
+                                        <SidebarMenuSubItem key={link.href}>
+                                            <SidebarMenuSubButton asChild>
+                                                <Link href={link.href}>
+                                                    <span className="opacity-50"><link.icon size={16} /></span>
+                                                    <span className="text-xs">{link.label}</span>
+                                                </Link>
+                                            </SidebarMenuSubButton>
+                                        </SidebarMenuSubItem>
+                                    ))}
+                                </SidebarMenuSub>
+                            </CollapsibleContent>
                         </SidebarMenuItem>
-                    ))}
+                    </Collapsible>
+                </SidebarMenu>
+            </SidebarGroup>
+
+            <SidebarGroup>
+                <SidebarGroupLabel>Configurações</SidebarGroupLabel>
+                <SidebarMenu>
+                    <SidebarMenuItem>
+                        <SidebarMenuButton asChild>
+                            <Link href="/configuracoes">
+                                <SettingsIcon />
+                                Configurações
+                            </Link>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarGroup>
         </>

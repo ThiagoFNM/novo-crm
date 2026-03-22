@@ -39,7 +39,8 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
             isEllipsis: false,
             cellAlign: 'center',
             headerAlign: 'center',
-            filterable: false
+            filterable: false,
+            isCheckbox: true
         }
     },
     {
@@ -55,7 +56,8 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
             filterable: true,
             filterType: "text",
             draggable: true,
-            keyRegister: true
+            keyRegister: true,
+            clickable: true
         }
     },
     {
@@ -72,7 +74,8 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
             filterable: true,
             filterType: "text",
             draggable: true,
-            keyRegister: true
+            keyRegister: true,
+            clickable: true
         },
         cell: cellCNPJ("cnpj")
     },

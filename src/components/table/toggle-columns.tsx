@@ -22,9 +22,8 @@ export function ToggleColumns<TData>({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="outline"
+          variant="controller"
           size="sm"
-          className="ml-auto hidden h-8 lg:flex bg-zinc-900 border-zinc-800 text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors"
         >
           <Settings2 />
           Colunas

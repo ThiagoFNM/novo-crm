@@ -128,6 +128,8 @@ export default function ListarEmpresas() {
         filterable?: boolean;
         filterType?: 'text' | 'number' | 'date' | 'boolean' | 'selected';
         keyRegister?: boolean;
+        clickable?: boolean;
+        isCheckbox?: boolean;
     }
 
     const activeHeader = table.getFlatHeaders().find(h => h.column.id === activeColumn)
@@ -154,7 +156,7 @@ export default function ListarEmpresas() {
                         sensors={sensors}
                     >
                         <Table style={{ width: table.getTotalSize(), tableLayout: "fixed" }}>
-                            <TableHeader className="bg-zinc-950 sticky top-0 z-10">
+                            <TableHeader className="bg-zinc-950 sticky top-0 z-1">
                                 {table.getHeaderGroups().map(headerGroup => (
                                     <TableRow key={headerGroup.id}>
                                         <SortableContext
@@ -173,6 +175,7 @@ export default function ListarEmpresas() {
                                                         className={cn(
                                                             "text-white/60 font-light relative group cursor-pointer bg-zinc-800",
                                                             meta?.isEllipsis && "truncate",
+                                                            meta?.isCheckbox && "p-0",
 
                                                         )}
                                                         style={{ width: header.getSize() }}
@@ -231,7 +234,7 @@ export default function ListarEmpresas() {
 
                             <TableBody>
                                 {table.getRowModel().rows.map(row => (
-                                    <TableRow key={row.id}>
+                                    <TableRow key={row.id} className="hover:bg-zinc-200/50 transition-colors duration-200">
                                         {row.getVisibleCells().map(cell => {
                                             const meta = cell.column.columnDef.meta as ColumnMeta;
                                             return (
@@ -239,13 +242,14 @@ export default function ListarEmpresas() {
                                                     key={cell.id}
                                                     style={{ width: cell.column.getSize() }}
                                                     className={cn(
-                                                        "overflow-hidden border-zinc-800 border font-light",
+                                                        "overflow-hidden border-zinc-800 border p-3 text-xs font-medium",
                                                         meta?.isEllipsis && "truncate",
-                                                        meta?.keyRegister && "text-blue-200 underline font-medium",
+                                                        meta?.keyRegister && "text-blue-400 underline font-bold",
+                                                        meta?.isCheckbox && "p-0",
                                                     )}
                                                     align={meta?.cellAlign || "left"}
                                                 >
-                                                    <span className="cursor-pointer">{flexRender(cell.column.columnDef.cell, cell.getContext())}</span>
+                                                    <span className={cn(meta?.clickable && "cursor-pointer")}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</span>
                                                 </TableCell>
                                             );
                                         })}
@@ -261,6 +265,7 @@ export default function ListarEmpresas() {
                                         "border-r border-zinc-700",
                                         "min-w-[100px] max-w-[300px]",
                                         "h-10 px-3 py-2 text-left text-sm font-medium",
+                                        "p-0",
                                         "bg-zinc-900 border-zinc-700",
                                         "cursor-grabbing",
                                         "shadow-2xl z-50",
