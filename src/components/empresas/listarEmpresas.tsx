@@ -112,7 +112,7 @@ export default function ListarEmpresas() {
         onRowSelectionChange: setRowSelection,
         initialState: {
             columnVisibility: columnsEmpresas.reduce((acc: Record<string, boolean>, col: any) => {
-                if (col.meta?.visible === false) {
+                if (col.meta?.visible === false || col.meta?.visible === undefined) {
                     acc[col.id || col.accessorKey] = false;
                 }
                 return acc;
