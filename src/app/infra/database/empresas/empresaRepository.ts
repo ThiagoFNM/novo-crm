@@ -12,7 +12,7 @@ export class EmpresaRepository {
         razaoSocial: empresas.razaoSocial,
         cnpj: cnpjConcatenated,
         dsAtividadeEconomicaPrincipal: empresas.dsAtividadeEconomicaPrincipal,
-        vertical: empresas.vertical,
+        setor: empresas.setor,
         posse: empresas.posse,
         trilha: empresas.trilha,
         dominioPublico: empresas.dominioPublico,

@@ -10,7 +10,7 @@ export const empresas = carteiraSchema.table('empresas',{
     cnpjDv: varchar('cnpj_dv',2),
     razaoSocial: varchar('nome_cliente',255),
     dsAtividadeEconomicaPrincipal: text('ds_atividade_economica'),
-    vertical: varchar('vertical',100),
+    setor: varchar('setor',100),
     posse: text('posse'),
     trilha: varchar('trilha',100),
     dominioPublico: boolean('flg_dominio_publico_sfa'),

@@ -14,7 +14,7 @@ export class EmpresaQueryService {
             transform: (v: string) => v.replace(/\D/g, '')
         },
         dsAtividadeEconomicaPrincipal: { column: empresas.dsAtividadeEconomicaPrincipal, type: "text" as const },
-        vertical: { column: empresas.vertical, type: "text" as const },
+        setor: { column: empresas.setor, type: "text" as const },
         posse: { column: empresas.posse, type: "text" as const },
         trilha: { column: empresas.trilha, type: "text" as const },
         dominioPublico: { column: empresas.dominioPublico, type: "boolean" as const },

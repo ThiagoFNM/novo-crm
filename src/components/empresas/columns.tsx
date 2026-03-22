@@ -95,8 +95,8 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
         }
     },
     {
-        accessorKey: "vertical",
-        header: "Vertical",
+        accessorKey: "setor",
+        header: "Setor",
         size: 200,
         maxSize: 200,
         minSize: 200,
@@ -254,7 +254,7 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
             cellAlign: 'left',
             draggable: true,
             filterable: true,
-            filterType: "selected",
+            filterType: "multiple",
         }
     },
     {

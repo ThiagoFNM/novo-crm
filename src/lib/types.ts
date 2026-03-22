@@ -3,7 +3,7 @@ export type Empresa = {
     razaoSocial: string
     cnpj: string
     dsAtividadeEconomicaPrincipal: string
-    vertical: string
+    setor: string
     posse: string
     trilha: string
     dominioPublico: boolean
