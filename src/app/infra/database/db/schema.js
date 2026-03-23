@@ -25,6 +25,7 @@ export const empresas = carteiraSchema.table('empresas',{
     statusRelacionamento: varchar('status_rel', 200),
     dtUltimaInteracao: timestamp('dt_ultima_interacao'),
     idProprietario: bigint('id_consultor_hub', {mode: 'number'}),
+	custom_fields: jsonb('custom_fields'),
     
 })
 
@@ -94,4 +95,13 @@ export const pipelines = carteiraSchema.table("pipelines", {
     config: jsonb("config").notNull(),
     criadoEm: timestamp("created_at", { mode: 'string' }).default(sql`CURRENT_TIMESTAMP`),
 	ativo: boolean().default(true),
+})
+
+export const customFields = carteiraSchema.table("custom_fields", {
+    id: serial().primaryKey().notNull(),
+	entidade_id: integer("entidade_id").notNull(),
+    nome: varchar("nome", { length: 200 }).notNull(),
+    tipo: varchar("tipo", { length: 10 }).notNull(),
+	config: jsonb("config").notNull(),
+    ativo: boolean().default(true),
 })

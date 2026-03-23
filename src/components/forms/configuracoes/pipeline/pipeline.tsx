@@ -8,7 +8,7 @@ import { Plus } from "lucide-react"
 import { Switch } from "@/components/ui/switch"
 import { FormLabel } from "@/components/ui/form-label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { usePipelineFormAction } from "@/hooks/pipelines/use-pipeline-form-action"
+import { usePipelineFormAction } from "@/hooks/empresa/pipelines/use-pipeline-form-action"
 import { UpdatePipelineData } from "@/app/infra/database/pipelines/pipelinesRepository"
 
 const entidades = [

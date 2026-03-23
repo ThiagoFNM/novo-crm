@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from "react"
-import { useEmpresas } from "@/hooks/empresa/use-empresas"
+import { useEmpresas } from "@/hooks/empresa/use-empresas";
 import { flexRender, getCoreRowModel, useReactTable, getPaginationRowModel, getSortedRowModel, SortingState } from "@tanstack/react-table"
 import { columnsEmpresas } from "./columns"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Table, TableBody, TableCell, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { ArrowDown, ArrowUp, ArrowUpDown, GripHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -46,8 +46,9 @@ export default function ListarEmpresas() {
     const sort = sorting.length > 0 ? sorting[0].id : "criadoEm";
     const order = sorting.length > 0 ? (sorting[0].desc ? "desc" : "asc") : "desc";
 
+    const { queryEmpresas } = useEmpresas(pagination.pageIndex + 1, pagination.pageSize, sort, order, filters)
 
-    const { data, isLoading, isError } = useEmpresas(pagination.pageIndex + 1, pagination.pageSize, sort, order, filters)
+    const { data, isLoading, isError } = queryEmpresas
 
     // A requisição axios no getEmpresas retorna os dados dentro de data.empresas (retorno da API: { empresas: [], total: 0 })
     // Como a resposta do axios tem o formato { data: { empresas: [], total: 0 } } precisamos acessar data.data.empresas
@@ -155,7 +156,7 @@ export default function ListarEmpresas() {
             {isLoading && <p className="px-4">Carregando...</p>}
             {isError && <p className="px-4">Erro ao carregar empresas</p>}
             {data && (
-                <div className="flex-1 overflow-auto mx-4 border border-zinc-800 rounded-md">
+                <div className="flex-1 overflow-auto mx-4  ">
                     <DndContext
                         collisionDetection={closestCenter}
                         modifiers={[restrictToHorizontalAxis]}
@@ -164,7 +165,7 @@ export default function ListarEmpresas() {
                         sensors={sensors}
                     >
                         <Table style={{ width: table.getTotalSize(), tableLayout: "fixed" }}>
-                            <TableHeader className="bg-zinc-950 sticky top-0 z-1">
+                            <TableHeader className=" sticky top-0 z-1">
                                 {table.getHeaderGroups().map(headerGroup => (
                                     <TableRow key={headerGroup.id}>
                                         <SortableContext
@@ -179,16 +180,16 @@ export default function ListarEmpresas() {
                                                         key={header.id}
                                                         header={header}
                                                         meta={meta}
-                                                        dragHandle={meta?.draggable ? <GripHorizontal size={14} className="hover:text-violet-300" /> : null}
+                                                        dragHandle={meta?.draggable ? <GripHorizontal size={14} className="hover:text-violet-600" /> : null}
                                                         className={cn(
-                                                            "text-white/60 font-light relative group cursor-pointer bg-zinc-800",
+                                                            "text-zinc-950 font-light relative group cursor-pointer bg-zinc-100 border border-zinc-800",
                                                             meta?.isEllipsis && "truncate",
                                                             meta?.isCheckbox && "p-0",
 
                                                         )}
                                                         style={{ width: header.getSize() }}
                                                     >
-                                                        <div className="flex items-center p-0.5 hover:text-violet-300 transition-colors duration-200 ">
+                                                        <div className="flex items-center p-0.5 hover:text-violet-600 transition-colors duration-200 ">
 
                                                             <div
                                                                 className="flex items-center cursor-pointer select-none"
@@ -250,7 +251,7 @@ export default function ListarEmpresas() {
                                                     key={cell.id}
                                                     style={{ width: cell.column.getSize() }}
                                                     className={cn(
-                                                        "overflow-hidden border-zinc-800 border p-3 text-xs font-medium",
+                                                        "overflow-hidden border-zinc-800 border p-3 text-xs font-light",
                                                         meta?.isEllipsis && "truncate",
                                                         meta?.keyRegister && "text-blue-400 underline font-bold",
                                                         meta?.isCheckbox && "p-0",

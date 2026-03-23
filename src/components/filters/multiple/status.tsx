@@ -2,30 +2,30 @@
 import { Filter } from "@/components/table/controller";
 import { ComboboxMultiple } from "@/components/ui/combobox-multiple";
 import { FilterValue } from "@/components/ui/filters";
-import { useEmpresasStatus } from "@/hooks/status/use-empresas-status";
+import { useEmpresasStatus } from "@/hooks/empresa/status/use-empresas-status";
 
-export default function StatusMultipleFilter({ 
-    filter, 
-    filterValues, 
-    setFilterValues, 
-    condition 
-}: { 
-    filter: Filter, 
-    filterValues: FilterValue[], 
+export default function StatusMultipleFilter({
+    filter,
+    filterValues,
+    setFilterValues,
+    condition
+}: {
+    filter: Filter,
+    filterValues: FilterValue[],
     setFilterValues: React.Dispatch<React.SetStateAction<FilterValue[]>>,
-    condition: string 
+    condition: string
 }) {
     const { query } = useEmpresasStatus();
-    
+
     const dataArray = Array.isArray(query.data) ? query.data : query.data?.data;
-    
+
     const options = [
         { label: "Vazio", value: "vazio" },
         ...(dataArray || [])
             .filter((status: any) => status.ativo !== false) // Assegurando de filtrar ativos
             .map((status: any) => ({
                 label: status.status,
-                
+
                 //Alterar para envio ao backend para query, esse campo é responsalvel por passar valor do filtro para URL
                 value: status.status
             }))
@@ -35,8 +35,8 @@ export default function StatusMultipleFilter({
 
     return (
         <ComboboxMultiple
-            options={options} 
-            value={selectedValues} 
+            options={options}
+            value={selectedValues}
             isLoading={query.isLoading}
             onChange={(newValues) => {
                 setFilterValues(prev => {
@@ -48,7 +48,7 @@ export default function StatusMultipleFilter({
                     }));
                     return newValuesObjects;
                 });
-            }} 
+            }}
             placeholder="Selecione os status..."
         />
     )

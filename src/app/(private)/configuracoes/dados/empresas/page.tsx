@@ -14,6 +14,7 @@ import { useState } from "react"
 import { cn } from "@/lib/utils";
 import StatusEmpresas from "@/components/configuracoes/dados/empresas/status";
 import PipelinesEmpresas from "@/components/configuracoes/dados/empresas/pipelines";
+import CamposEmpresas from "@/components/configuracoes/dados/empresas/campos";
 
 function MenuDadosEmpresas({ setCampoSelecionado, campoSelecionado }: { setCampoSelecionado: (campo: string) => void, campoSelecionado: string }) {
 
@@ -82,6 +83,14 @@ export default function ConfigDadosEmpresasPage() {
                 {campoSelecionado === "Pipelines" && (
                     <PipelinesEmpresas />
                 )}
+
+                {campoSelecionado === "Campos" && (
+                    <CamposEmpresas />
+                )}
+
+                {/* {campoSelecionado === "Tags" && (
+                    <TagsEmpresas />
+                )} */}
             </div>
         </section>
     )

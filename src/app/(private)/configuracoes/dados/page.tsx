@@ -1,9 +1,5 @@
 import {
-    Sidebar,
-    SidebarContent,
-    SidebarFooter,
     SidebarGroup,
-    SidebarHeader,
     SidebarMenu,
     SidebarMenuItem,
     SidebarMenuButton,

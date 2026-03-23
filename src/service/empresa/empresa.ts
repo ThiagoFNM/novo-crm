@@ -35,3 +35,4 @@ export async function getEmpresas(page: number, limit: number, sort: string, ord
 
     return await axios.get(`/api/empresas?${params.toString()}`);
 }
+

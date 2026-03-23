@@ -1,6 +1,6 @@
-import { FormStatus } from "@/components/form/configuracoes/statusEmpresas/status";
+import { FormStatus } from "@/components/forms/configuracoes/statusEmpresas/status";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { useEmpresasStatus } from "@/hooks/status/use-empresas-status";
+import { useEmpresasStatus } from "@/hooks/empresa/status/use-empresas-status";
 import { Ellipsis } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";

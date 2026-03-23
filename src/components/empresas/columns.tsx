@@ -40,7 +40,8 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
             cellAlign: 'center',
             headerAlign: 'center',
             filterable: false,
-            isCheckbox: true
+            isCheckbox: true,
+            visible: true
         }
     },
     {
@@ -58,7 +59,7 @@ export const columnsEmpresas: ColumnDef<Empresa>[] = [
             draggable: true,
             keyRegister: true,
             clickable: true,
-            visible: false
+            visible: true
         }
     },
     {

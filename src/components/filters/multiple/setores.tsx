@@ -2,30 +2,30 @@
 import { Filter } from "@/components/table/controller";
 import { ComboboxMultiple } from "@/components/ui/combobox-multiple";
 import { FilterValue } from "@/components/ui/filters";
-import { useEmpresasSetores } from "@/hooks/setores/use-empresas-setores";
+import { useEmpresasSetores } from "@/hooks/empresa/setores/use-empresas-setores";
 
-export default function SetoresMultipleFilter({ 
-    filter, 
-    filterValues, 
-    setFilterValues, 
-    condition 
-}: { 
-    filter: Filter, 
-    filterValues: FilterValue[], 
+export default function SetoresMultipleFilter({
+    filter,
+    filterValues,
+    setFilterValues,
+    condition
+}: {
+    filter: Filter,
+    filterValues: FilterValue[],
     setFilterValues: React.Dispatch<React.SetStateAction<FilterValue[]>>,
-    condition: string 
+    condition: string
 }) {
     const { query } = useEmpresasSetores();
-    
+
     const dataArray = Array.isArray(query.data) ? query.data : query.data?.data;
-    
+
     const options = [
         { label: "Vazio", value: "vazio" },
         ...(dataArray || [])
             .filter((setor: any) => setor.ativo !== false) // Assegurando de filtrar ativos
             .map((setor: any) => ({
                 label: setor.setor,
-                
+
                 //Alterar para envio ao backend para query, esse campo é responsalvel por passar valor do filtro para URL
                 value: setor.setor
             }))
@@ -35,8 +35,8 @@ export default function SetoresMultipleFilter({
 
     return (
         <ComboboxMultiple
-            options={options} 
-            value={selectedValues} 
+            options={options}
+            value={selectedValues}
             isLoading={query.isLoading}
             onChange={(newValues) => {
                 setFilterValues(prev => {
@@ -48,7 +48,7 @@ export default function SetoresMultipleFilter({
                     }));
                     return newValuesObjects;
                 });
-            }} 
+            }}
             placeholder="Selecione os setores..."
         />
     )

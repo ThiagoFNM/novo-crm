@@ -6,9 +6,14 @@ import { getEmpresas } from '@/service/empresa/empresa'
 import { Filter } from '@/components/table/controller'
 
 export function useEmpresas(page: number, limit: number, sort: string, order: string, filters: Filter[] = []) {
-    return useQuery({
+
+    const queryEmpresas = useQuery({
         queryKey: ['empresas', page, limit, sort, order, filters],
         queryFn: () => getEmpresas(page, limit, sort, order, filters),
         placeholderData: keepPreviousData,
     })
+
+    return { queryEmpresas }
 }
+
+
